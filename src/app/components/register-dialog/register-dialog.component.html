@@ -1,15 +1,24 @@
 <div class="wrapper">
-  <h2 class="title">Log in to your account</h2>
-  <p class="description">Welcome back! Please enter your details</p>
+  <h2 class="title">Registration</h2>
+  <p class="description">Fill all fields</p>
 
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <mat-form-field>
       <mat-label>Login</mat-label>
       <input matInput placeholder="Enter your login" formControlName="login" />
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Password</mat-label>
+      <mat-label>Email</mat-label>r
+      <input
+        matInput
+        type="email"
+        placeholder="Enter your email"
+        formControlName="email" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Password</mat-label>r
       <input
         matInput
         type="password"
@@ -21,7 +30,7 @@
       mat-button
       cdkFocusInitial
       type="submit"
-      [disabled]="!loginForm.valid">
+      [disabled]="!registerForm.valid">
       Log in
     </button>
   </form>
