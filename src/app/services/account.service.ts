@@ -4,7 +4,6 @@ import { map } from "rxjs/operators";
 
 import { environment } from '@environments/environment';
 import { User } from "../interfaces/user";
-import { Observer } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
