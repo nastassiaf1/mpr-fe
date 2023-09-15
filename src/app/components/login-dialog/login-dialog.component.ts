@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { Store, select } from '@ngrx/store';
-import { GetUser } from 'src/app/store/actions/user.actions';
-import { UserService } from 'src/app/services/user.service';
+import { LogIn } from 'src/app/store/actions/user.actions';
 import { getUser } from 'src/app/store/selectors/auth.selectors';
 import { AppState } from 'src/app/store/state/app.state';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-login-dialog',
@@ -26,10 +26,12 @@ import { AppState } from 'src/app/store/state/app.state';
   ]
 })
 export class LoginDialogComponent implements OnInit {
-  constructor(private store: Store<AppState>) {}
+  private readonly destroy$ = new Subject<boolean>();
+
+  constructor(private readonly store: Store<AppState>, private dialogRef: MatDialogRef<LoginDialogComponent>) {}
 
   ngOnInit() {
-    this.store.pipe(select(getUser)).subscribe((res) => {
+    this.store.pipe(takeUntil(this.destroy$), select(getUser)).subscribe((res) => {
       console.log(res);
     })
   }
@@ -43,7 +45,13 @@ export class LoginDialogComponent implements OnInit {
     const login = this.loginForm.controls['login'].value;
     const password = this.loginForm.controls['password'].value;
 
-    this.store.dispatch(new GetUser({ login, password }));
+    this.store.dispatch(new LogIn({ login, password }));
+    this.dialogRef.close();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 }
 

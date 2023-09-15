@@ -1,11 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AccountService } from 'src/app/services/account.service';
+import { Store, select } from '@ngrx/store';
+import { getUser } from 'src/app/store/selectors/auth.selectors';
+import { AppState } from 'src/app/store/state/app.state';
+import { RegisterUser } from 'src/app/store/actions/user.actions';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-register-dialog',
@@ -23,8 +29,16 @@ import { AccountService } from 'src/app/services/account.service';
   templateUrl: './register-dialog.component.html',
   styleUrls: ['./register-dialog.component.scss']
 })
-export class RegisterDialogComponent {
-  constructor(private accountService: AccountService) {}
+export class RegisterDialogComponent implements OnInit, OnDestroy {
+  private destroy$ = new Subject<boolean>();
+
+  constructor(private readonly store: Store<AppState>, private dialogRef: MatDialogRef<RegisterDialogComponent>) {}
+
+  ngOnInit() {
+    this.store.pipe(takeUntil(this.destroy$), select(getUser)).subscribe((res) => {
+      console.log(res);
+    })
+  }
 
   registerForm: FormGroup = new FormGroup({
     login: new FormControl('', [Validators.required, Validators.minLength(4)]),
@@ -37,7 +51,12 @@ export class RegisterDialogComponent {
     const password = this.registerForm.controls['password'].value;
     const email = this.registerForm.controls['email'].value;
 
-    this.accountService.register({login, password, email}).subscribe((user) => {
-    })
+    this.store.dispatch(new RegisterUser({ login, password, email }));
+    this.dialogRef.close();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 }

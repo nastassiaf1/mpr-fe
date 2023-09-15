@@ -1,0 +1,10 @@
+<h1 class="logo">MPR</h1>
+
+<ng-container *ngIf="!user; else userIconTemplate">
+  <button mat-raised-button color="primary" (click)="openLoginForm()">Log in</button>
+  <button mat-raised-button color="primary" (click)="openRegistrationForm()">Registration</button>
+</ng-container>
+
+<ng-template #userIconTemplate>
+  {{ user!.login }}
+</ng-template>

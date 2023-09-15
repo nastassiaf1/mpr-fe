@@ -1,4 +1,4 @@
-import { EUserActions, GetUserFail, GetUserSuccess } from './../actions/user.actions';
+import { EUserActions, LogInFail, LogInSuccess, RegisterUserFail, RegisterUserSuccess } from './../actions/user.actions';
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { of } from 'rxjs/internal/observable/of';
@@ -12,16 +12,34 @@ export class UserEffects {
 
   login$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(EUserActions.GET_USER),
+      ofType(EUserActions.LOG_IN),
       map(({ payload }) => payload),
       switchMap((user: User) => {
         return this.accountService.login(user).pipe(
           map((selectedUser: User) => {
-            return new GetUserSuccess(selectedUser);
+            return new LogInSuccess(selectedUser);
           }),
           catchError((error) => {
             console.log(error);
-            return of(new GetUserFail())
+            return of(new LogInFail())
+          })
+        )
+      }),
+    )
+  })
+
+  register$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(EUserActions.REGISTER_USER),
+      map(({ payload }) => payload),
+      switchMap((user: User) => {
+        return this.accountService.register(user).pipe(
+          map((selectedUser: User) => {
+            return new RegisterUserSuccess(selectedUser);
+          }),
+          catchError((error) => {
+            console.log(error);
+            return of(new RegisterUserFail());
           })
         )
       }),

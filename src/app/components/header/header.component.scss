@@ -1,0 +1,23 @@
+@use '/src/app/styles/variables/color.scss';
+@use '/src/app/styles/variables/spacing.scss';
+@use '/src/app/styles/variables/border.scss';
+
+:host {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: spacing.$space-2 spacing.$space-4;
+  background-color: color.$base-black-100;
+}
+
+.logo {
+  margin-right: auto;
+  padding: spacing.$space-2 spacing.$space-4;
+  background: linear-gradient(90deg, color.$base-text-1 0%, color.$base-text-1 35%, color.$base-text-2 100%);
+  border-radius: border.$border-radius-6;
+}
+
+button {
+  margin-right: spacing.$space-4;
+  font-size: 14px;
+}
