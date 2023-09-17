@@ -1,0 +1,41 @@
+@use '/src/app/styles/variables/color.scss';
+@use '/src/app/styles/variables/spacing.scss';
+@use '/src/app/styles/variables/border.scss';
+
+.dialog {
+  $main-color: #0F172A;
+
+  box-sizing: border-box;
+  height: 100%;
+  padding: spacing.$space-5 spacing.$space-5 spacing.$space-7;
+  color: $main-color;
+
+  &__title {
+    text-align: center;
+  }
+
+  &__description {
+    text-align: center;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  &__btn {
+    background-color: $main-color;
+    color: color.$base-white-0;
+
+    &--submit {
+      width: 100%;
+    }
+
+    &:disabled {
+      background-color: color.$base-btn-disabled;
+    }
+
+    &:hover {
+      background-color: rgba($main-color, 0.95);
+    }
+  }
+}

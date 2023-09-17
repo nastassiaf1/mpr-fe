@@ -13,7 +13,7 @@ import { Subject, takeUntil } from 'rxjs';
 @Component({
   selector: 'app-login-dialog',
   templateUrl: './login-dialog.component.html',
-  styleUrls: ['./login-dialog.component.scss'],
+  styleUrls: ['./login-dialog.component.scss', './../styles/dialog.scss'],
   standalone: true,
   imports: [
     MatButtonModule,

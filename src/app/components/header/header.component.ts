@@ -24,6 +24,13 @@ import { User } from 'src/app/interfaces/user';
 })
 export class HeaderComponent implements OnInit {
   private readonly destroy$ = new Subject<boolean>();
+  private readonly dialogConfig = {
+    width: '600px',
+    height: 'auto',
+    hasBackdrop: true,
+    panelClass: 'dialog-container'
+  };
+
   user: User | null = null;
 
   constructor(private dialog: MatDialog, private readonly store: Store<AppState>) {}
@@ -35,18 +42,10 @@ export class HeaderComponent implements OnInit {
   }
 
   openLoginForm() {
-    this.dialog.open(LoginDialogComponent, {
-      height: '400px',
-      width: '600px',
-      hasBackdrop: true,
-    });
+    this.dialog.open(LoginDialogComponent, this.dialogConfig);
   }
 
   openRegistrationForm() {
-    this.dialog.open(RegisterDialogComponent, {
-      height: '400px',
-      width: '600px',
-      hasBackdrop: true,
-    });
+    this.dialog.open(RegisterDialogComponent, this.dialogConfig);
   }
 }

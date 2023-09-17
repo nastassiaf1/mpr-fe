@@ -5,13 +5,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { AccountService } from 'src/app/services/account.service';
 import { Store, select } from '@ngrx/store';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+
 import { getUser } from 'src/app/store/selectors/auth.selectors';
 import { AppState } from 'src/app/store/state/app.state';
 import { RegisterUser } from 'src/app/store/actions/user.actions';
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-register-dialog',
@@ -27,7 +27,7 @@ import { Subject } from 'rxjs';
     MatDialogModule,
   ],
   templateUrl: './register-dialog.component.html',
-  styleUrls: ['./register-dialog.component.scss']
+  styleUrls: ['./register-dialog.component.scss', './../styles/dialog.scss']
 })
 export class RegisterDialogComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<boolean>();
