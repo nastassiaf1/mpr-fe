@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { Subject, takeUntil } from 'rxjs';
 import { Store, select } from '@ngrx/store';
@@ -10,6 +11,7 @@ import { RegisterDialogComponent } from '../register-dialog/register-dialog.comp
 import { getUser } from 'src/app/store/selectors/auth.selectors';
 import { AppState } from 'src/app/store/state/app.state';
 import { User } from 'src/app/interfaces/user';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -19,7 +21,9 @@ import { User } from 'src/app/interfaces/user';
   imports: [
     CommonModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatMenuModule,
+    RouterModule
   ],
 })
 export class HeaderComponent implements OnInit {

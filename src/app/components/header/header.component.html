@@ -1,10 +1,15 @@
 <h1 class="logo">MPR</h1>
 
-<ng-container *ngIf="!user; else userIconTemplate">
+<ng-container *ngIf="!user; else userTemplate">
   <button mat-raised-button color="primary" (click)="openLoginForm()">Log in</button>
   <button mat-raised-button color="primary" (click)="openRegistrationForm()">Registration</button>
 </ng-container>
 
-<ng-template #userIconTemplate>
-  {{ user!.login }}
+<ng-template #userTemplate>
+  <button mat-raised-button color="primary" [matMenuTriggerFor]="userMenu">{{ user!.login }}</button>
+
+  <mat-menu #userMenu="matMenu">
+    <a mat-menu-item [routerLink]="['/', user!.login]">Profile</a>
+    <button mat-menu-item>Log out</button>
+  </mat-menu>
 </ng-template>
