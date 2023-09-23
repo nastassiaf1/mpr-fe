@@ -12,7 +12,7 @@
 
 .logo {
   margin: 0 auto 0 0;
-  padding: spacing.$space-2 spacing.$space-4;
+  padding: spacing.$space-1 spacing.$space-2;
   background: linear-gradient(90deg, color.$base-text-1 0%, color.$base-text-1 35%, color.$base-text-2 100%);
   border-radius: border.$border-radius-6;
 }
@@ -20,4 +20,31 @@
 button {
   margin-right: spacing.$space-4;
   font-size: 14px;
+}
+
+.nav {
+  ul {
+    margin: 0 40px;
+    list-style-type: none;
+    display: flex;
+    width: 300px;
+    justify-content: space-around;
+  }
+
+  .nav__item {
+    a {
+      font-size: 14px;
+      color: color.$base-white-100;
+
+      &:hover,
+      &:focus,
+      &:active {
+        color: color.$base-white-0;
+      }
+
+      &--active {
+        text-shadow: color.$base-white-0 0 0 5px;
+      }
+    }
+  }
 }

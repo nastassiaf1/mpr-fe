@@ -5,13 +5,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { Subject, takeUntil } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
 import { RegisterDialogComponent } from '../register-dialog/register-dialog.component';
 import { getUser } from 'src/app/store/selectors/auth.selectors';
 import { AppState } from 'src/app/store/state/app.state';
 import { User } from 'src/app/interfaces/user';
-import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header',

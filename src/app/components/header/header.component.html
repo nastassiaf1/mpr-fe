@@ -1,8 +1,22 @@
 <h1 class="logo">MPR</h1>
 
+<nav class="nav">
+  <ul>
+    <li class="nav__item">
+      <a href="#">Features</a>
+    </li>
+    <li class="nav__item">
+      <a href="#">Blog</a>
+    </li>
+    <li class="nav__item">
+      <a href="#">About</a>
+    </li>
+  </ul>
+</nav>
+
 <ng-container *ngIf="!user; else userTemplate">
-  <button mat-raised-button color="primary" (click)="openLoginForm()">Log in</button>
-  <button mat-raised-button color="primary" (click)="openRegistrationForm()">Registration</button>
+  <button mat-raised-button (click)="openLoginForm()">Log in</button>
+  <button mat-raised-button color="primary" (click)="openRegistrationForm()">Get Started</button>
 </ng-container>
 
 <ng-template #userTemplate>
