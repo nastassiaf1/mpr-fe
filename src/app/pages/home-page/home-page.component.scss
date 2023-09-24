@@ -1,5 +1,42 @@
+@use '/src/app/styles/variables/color.scss';
+@use '/src/app/styles/variables/spacing.scss';
+
 .news {
   position: fixed;
   bottom: 0;
   right: 0;
+}
+
+.preview {
+  text-align: center;
+
+  &__list {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+  }
+
+  &__list-item {
+    display: flex;
+    max-width: 245px;
+    line-height: 1.5;
+    text-align: start;
+
+    mat-icon {
+      padding-right: spacing.$space-3;
+    }
+  }
+}
+
+.header {
+  margin-top: spacing.$space-12;
+  font-size: 30px;
+  text-align: center;
+  letter-spacing: 1px;
+  color: color.$base-text-100;
+  text-shadow: color.$base-white-100 1px 2px 3px;
+
+  &__item {
+    color: color.$base-text-3;
+  }
 }
