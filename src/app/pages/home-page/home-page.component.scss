@@ -1,5 +1,19 @@
+@use '/src/app/styles/variables/color.scss';
+
 .news {
   position: fixed;
   bottom: 0;
   right: 0;
+}
+
+.header {
+  font-size: 26px;
+  text-align: center;
+  letter-spacing: 1px;
+  color: color.$base-text-100;
+  text-shadow: color.$base-white-100 1px 2px 3px;
+
+  &__item {
+    color: color.$base-text-3;
+  }
 }
