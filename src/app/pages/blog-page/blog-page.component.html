@@ -1,0 +1,17 @@
+<div>
+  <h2>Our blog</h2>
+  <p>Lorem ipsum dolor sit amet consectetur. Amet cras scelerisque pretium consectetur vitae.
+    Laoreet cursus et arcu ornare. Aliquet posuere lobortis at.
+  </p>
+  <button mat-raised-button>Subscribe</button>
+</div>
+
+<div>
+  <section *ngFor="let post of posts">
+    <h2>{{ post.header }}</h2>
+  </section>
+
+  <div *ngIf="!(posts && posts.length)">
+    Posts not found
+  </div>
+</div>
