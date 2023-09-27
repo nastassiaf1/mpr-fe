@@ -6,9 +6,15 @@
   <button mat-raised-button>Subscribe</button>
 </div>
 
-<div>
-  <section *ngFor="let post of posts">
-    <h2>{{ post.header }}</h2>
+<div class="posts-wrapper">
+  <section *ngFor="let post of posts" class="post">
+    <div class="post__img-wrapper">
+      <img class="post__img" loading="lazy" [src]="post.src || 'assets/images/default-post-img.png'">
+    </div>
+    <h2 class="post__header">{{ post.header }}</h2>
+    <p class="post__description">{{ post.description }}</p>
+
+    <button mat-button>Read post</button>
   </section>
 
   <div *ngIf="!(posts && posts.length)">

@@ -1,7 +1,8 @@
 export interface Post {
-  header: string | null;
-  body: string | null;
-  description: string | null;
-  author: string | null;
-  createdAt: Date | null;
+  header?: string;
+  body?: string;
+  description?: string;
+  author?: string;
+  createdAt?: Date;
+  src?: string;
 }
