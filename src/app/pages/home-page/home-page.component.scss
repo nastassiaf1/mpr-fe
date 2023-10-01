@@ -5,6 +5,12 @@
   position: fixed;
   bottom: 0;
   right: 0;
+
+  &__button {
+    margin-left: auto;
+    display: block;
+    color: color.$base-text-100;
+  }
 }
 
 .preview {

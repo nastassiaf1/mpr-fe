@@ -22,6 +22,14 @@
   </ul>
 </div>
 
-<article class="news">
+<article class="news" [@showNews]="isNewsShown ? 'opened' : 'closed'">
+  <button
+    mat-icon-button
+    class="news__button"
+    color="primary"
+    attr.aria-label="{{ isNewsShown ? 'Hide' : 'Open' + ' news' }}"
+    (click)="isNewsShown = !isNewsShown">
+    <mat-icon>closed</mat-icon>
+  </button>
   <a class="twitter-timeline" data-lang="en" data-width="320" data-height="500" href="https://twitter.com/fsnastassia?ref_src=twsrc%5Etfw">Follow our news</a>
 </article>
