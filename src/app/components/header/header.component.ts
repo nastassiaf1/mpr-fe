@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, filter, takeUntil } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 
 import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
 import { RegisterDialogComponent } from '../register-dialog/register-dialog.component';
@@ -23,10 +24,11 @@ import { User } from 'src/app/interfaces/user';
     MatButtonModule,
     MatDialogModule,
     MatMenuModule,
-    RouterModule
+    RouterModule,
+    MatIconModule,
   ],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   private readonly destroy$ = new Subject<boolean>();
   private readonly dialogConfig = {
     width: '600px',
@@ -36,13 +38,20 @@ export class HeaderComponent implements OnInit {
   };
 
   user: User | null = null;
+  isHomePage: boolean = false;
 
-  constructor(private dialog: MatDialog, private readonly store: Store<AppState>) {}
+  constructor(private dialog: MatDialog, private readonly store: Store<AppState>, private router: Router) {}
 
   ngOnInit() {
     this.store.pipe(takeUntil(this.destroy$), select(getUser)).subscribe((user) => {
       this.user = user;
-    })
+    });
+
+    this.router.events.pipe(takeUntil(this.destroy$), filter(event => event instanceof NavigationEnd)).subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.isHomePage = event.url === '/';
+      }
+    });
   }
 
   openLoginForm() {
@@ -51,5 +60,10 @@ export class HeaderComponent implements OnInit {
 
   openRegistrationForm() {
     this.dialog.open(RegisterDialogComponent, this.dialogConfig);
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 }

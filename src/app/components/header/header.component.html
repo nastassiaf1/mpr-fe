@@ -1,4 +1,14 @@
-<h1 class="logo">MPR</h1>
+<div class="logo" routerLink="/">
+  <button
+    *ngIf="!isHomePage"
+    mat-icon-button
+    class="logo__back-btn"
+    aria-label="Back to Home page"
+  >
+    <mat-icon>navigate_before</mat-icon>
+  </button>
+  <h1 class="logo__header">MPR</h1>
+</div>
 
 <nav class="nav">
   <ul>
